@@ -4,13 +4,14 @@
 
 // `https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=30&q=${q}&key=AIzaSyCAU9Ht0n9lCAD6ac8Yd_mb9LtCLRjYsxw`
 
-//https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=30&q=thor&key=[YOUR_API_KEY]'
+
 const  searchVideos = async() => {
     try {
         //const q =
         const q = document.getElementById("query").value;
 
         const res = await fetch(
+            //`https://youtube.googleapis.com/youtube/v3/search?part=snippet&location=India&maxResults=30&q=${q}%202&key=AIzaSyCAU9Ht0n9lCAD6ac8Yd_mb9LtCLRjYsxw`
             `https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=30&q=${q}%202&key=AIzaSyCAU9Ht0n9lCAD6ac8Yd_mb9LtCLRjYsxw`
         );
 
@@ -44,11 +45,30 @@ const append = (videos) => {
        name.innerText = title;
 
        div.append(iframe, name)
+ 
+       let data = {
+           title,
+           videoId,
+       };
+
+       div.onclick = () =>{
+           showVideo(data)
+       }
 
        show_videos.append(div);
+    });
 
-    })
 
-
+};
+const showVideo = (x) =>{
+    window.location.href = "video.html"
+    localStorage.setItem("video",JSON.stringify(x))
 }
 
+
+
+
+
+
+
+//https://youtube.googleapis.com/youtube/v3/search?part=snippet&location=India&locationRadius=9445mi&maxResults=30&q=thor&regionCode=India&key=[YOUR_API_KEY]' \
